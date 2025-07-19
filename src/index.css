@@ -3,28 +3,155 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Premium Dark Theme - Real Estate Platform */
+    --background: 218 8% 8%;
+    --foreground: 218 8% 95%;
+
+    --card: 218 8% 10%;
+    --card-foreground: 218 8% 95%;
+
+    --popover: 218 8% 10%;
+    --popover-foreground: 218 8% 95%;
+
+    --primary: 210 100% 70%;
+    --primary-foreground: 218 8% 8%;
+
+    --secondary: 218 8% 14%;
+    --secondary-foreground: 218 8% 95%;
+
+    --muted: 218 8% 16%;
+    --muted-foreground: 218 8% 65%;
+
+    --accent: 160 84% 39%;
+    --accent-foreground: 218 8% 95%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 218 8% 95%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 218 8% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 218 8% 95%;
+
+    --border: 218 8% 20%;
+    --input: 218 8% 20%;
+    --ring: 210 100% 70%;
+
+    /* Custom variables for premium effects */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glow-primary: rgba(59, 130, 246, 0.5);
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 70%) 0%, hsl(200 95% 60%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(160 84% 39%) 100%);
+  }
+
+  * {
+    @apply border-border;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/70;
   }
 }
 
-.glass-card {
-  @apply bg-secondary bg-opacity-20 backdrop-blur-lg border border-white border-opacity-10 shadow-lg;
-}
-
-.crypto-chart {
-  @apply h-[300px] w-full;
-}
-
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 1;
+@layer components {
+  /* Glass morphism card */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    @apply shadow-2xl;
   }
-  50% {
-    opacity: 0.8;
-  }
-}
 
-.animate-pulse-subtle {
-  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  /* Premium button with glow effect */
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-glow:hover::before {
+    left: 100%;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Token flow animation container */
+  .token-container {
+    @apply relative overflow-hidden;
+  }
+
+  .token {
+    @apply absolute w-6 h-6 rounded-full bg-primary/80;
+    animation: token-flow 3s ease-in-out infinite;
+  }
+
+  .token:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .token:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .hover-lift:hover {
+    @apply transform -translate-y-1 shadow-2xl;
+  }
+
+  /* Property card styling */
+  .property-card {
+    @apply glass-card hover-lift rounded-xl p-6 transition-all duration-300;
+    background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(255,255,255,0.02) 100%);
+  }
+
+  .property-card:hover {
+    border-color: var(--glass-border);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--glass-border);
+  }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
 }

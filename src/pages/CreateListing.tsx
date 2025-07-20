@@ -37,7 +37,7 @@ const CreateListing = () => {
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">List Your Property</h1>
@@ -47,7 +47,7 @@ const CreateListing = () => {
         </div>
 
         {/* Progress Steps */}
-        <div className="mb-8">
+        <div className="max-w-4xl mx-auto mb-8">
           <div className="flex items-center justify-between">
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -80,7 +80,8 @@ const CreateListing = () => {
         </div>
 
         {/* Step Content */}
-        <Card className="glass-card">
+        <div className="max-w-4xl mx-auto">
+          <Card className="glass-card">
           <CardContent className="p-8">
             {currentStep === 1 && (
               <div className="space-y-6">
@@ -347,7 +348,8 @@ const CreateListing = () => {
               </Button>
             </div>
           </CardContent>
-        </Card>
+          </Card>
+        </div>
       </div>
     </div>
   );

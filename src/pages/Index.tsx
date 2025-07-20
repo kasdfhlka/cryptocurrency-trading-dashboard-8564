@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Home, Coins, TrendingUp, Shield, Zap } from "lucide-react";
+import { ArrowRight, Home, Coins, TrendingUp, Shield, Zap, Users, Lock, Banknote } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const Index = () => {
+  const heroRef = useScrollReveal();
+  const featuresRef = useScrollReveal();
+  const statsRef = useScrollReveal();
+  const benefitsRef = useScrollReveal();
+  const ctaRef = useScrollReveal();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -28,9 +35,9 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1, ease: "easeOut" }}
             >
               <Badge className="mb-6 bg-primary/20 text-primary border-primary/30">
                 <Zap className="w-3 h-3 mr-1" />
@@ -65,7 +72,7 @@ const Index = () => {
             className="mt-16 token-container h-32 relative"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
+            transition={{ delay: 1.2, duration: 1 }}
           >
             <div className="token"></div>
             <div className="token"></div>
@@ -75,8 +82,8 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="section-padding bg-muted/20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="section-padding bg-muted/20" ref={featuresRef}>
+        <div className="max-w-7xl mx-auto px-6 scroll-reveal">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">How It Works</h2>
             <p className="text-xl text-muted-foreground">
@@ -102,28 +109,84 @@ const Index = () => {
                 description: "Receive rental income monthly and trade your tokens anytime on our marketplace.",
               },
             ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 * index, duration: 0.6 }}
-              >
-                <Card className="property-card text-center h-full fade-in">
+              <div key={index} className={`scroll-reveal-scale ${index === 1 ? 'scroll-reveal' : index === 2 ? 'scroll-reveal-right' : 'scroll-reveal-left'}`}>
+                <Card className="property-card text-center h-full">
                   <CardContent className="p-8">
                     <feature.icon className="w-16 h-16 mx-auto mb-6 text-primary" />
                     <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
                     <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="section-padding" ref={statsRef}>
+        <div className="max-w-7xl mx-auto px-6 scroll-reveal">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { value: "$2.1M+", label: "Total Value Tokenized" },
+              { value: "1,250+", label: "Active Investors" },
+              { value: "45", label: "Properties Listed" },
+              { value: "7.2%", label: "Average Annual Yield" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center scroll-reveal-scale">
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="section-padding bg-muted/20" ref={benefitsRef}>
+        <div className="max-w-7xl mx-auto px-6 scroll-reveal">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Why Choose PropertyFlow?</h2>
+            <p className="text-xl text-muted-foreground">
+              Experience the future of real estate investment
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Lock,
+                title: "Secure & Transparent",
+                description: "All transactions secured by blockchain technology with full transparency and immutable records.",
+              },
+              {
+                icon: Users,
+                title: "Community Driven",
+                description: "Join a community of like-minded investors building wealth through real estate.",
+              },
+              {
+                icon: Banknote,
+                title: "Low Minimum Investment",
+                description: "Start investing with as little as $45. No need for large capital requirements.",
+              },
+            ].map((benefit, index) => (
+              <div key={index} className="scroll-reveal-scale">
+                <Card className="property-card text-center h-full">
+                  <CardContent className="p-8">
+                    <benefit.icon className="w-16 h-16 mx-auto mb-6 text-primary" />
+                    <h3 className="text-xl font-bold mb-4">{benefit.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto text-center px-6">
+      <section className="section-padding" ref={ctaRef}>
+        <div className="max-w-4xl mx-auto text-center px-6 scroll-reveal">
           <h2 className="text-4xl font-bold mb-6">Ready to Start Investing?</h2>
           <p className="text-xl text-muted-foreground mb-8">
             Join thousands of investors building wealth through tokenized real estate

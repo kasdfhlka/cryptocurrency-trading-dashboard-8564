@@ -4,50 +4,7 @@
 
 @layer base {
   :root {
-    /* Modern Neutral Theme - Clean & Approachable */
-    --background: 0 0% 98%;
-    --foreground: 0 0% 15%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 15%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 15%;
-
-    --primary: 0 0% 35%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 25%;
-
-    --muted: 0 0% 94%;
-    --muted-foreground: 0 0% 45%;
-
-    --accent: 0 0% 92%;
-    --accent-foreground: 0 0% 25%;
-
-    --success: 142 70% 45%;
-    --success-foreground: 0 0% 98%;
-
-    --warning: 38 85% 50%;
-    --warning-foreground: 0 0% 15%;
-
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 35%;
-
-    /* Soft neutral effects */
-    --glass-bg: rgba(255, 255, 255, 0.8);
-    --glass-border: rgba(0, 0, 0, 0.08);
-    --soft-shadow: rgba(0, 0, 0, 0.04);
-    --gradient-subtle: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(0 0% 96%) 100%);
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 35%) 0%, hsl(0 0% 25%) 100%);
-  }
-
-  .dark {
+    /* Sleek Dark Mode Theme */
     --background: 0 0% 6%;
     --foreground: 0 0% 92%;
 
@@ -69,13 +26,56 @@
     --accent: 0 0% 16%;
     --accent-foreground: 0 0% 85%;
 
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 38 85% 50%;
+    --warning-foreground: 0 0% 15%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+
     --border: 0 0% 18%;
     --input: 0 0% 18%;
     --ring: 0 0% 85%;
 
+    /* Dark mode effects */
     --glass-bg: rgba(0, 0, 0, 0.4);
     --glass-border: rgba(255, 255, 255, 0.1);
     --soft-shadow: rgba(0, 0, 0, 0.3);
+    --gradient-subtle: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 6%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 85%) 0%, hsl(0 0% 75%) 100%);
+  }
+
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    --primary: 0 0% 35%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 25%;
+
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 92%;
+    --accent-foreground: 0 0% 25%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 35%;
+
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --soft-shadow: rgba(0, 0, 0, 0.04);
   }
 
   * {
@@ -135,6 +135,51 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     @apply font-medium;
+  }
+
+  /* Scroll-based animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
   }
 
   /* Fade in animation */
@@ -198,6 +243,30 @@
 
   .soft-shadow-lg {
     box-shadow: 0 8px 24px var(--soft-shadow);
+  }
+
+  /* Token flow animation */
+  .token-container {
+    @apply relative overflow-hidden;
+  }
+
+  .token {
+    @apply absolute w-6 h-6 rounded-full bg-primary/80;
+    animation: tokenFlow 3s ease-in-out infinite;
+  }
+
+  .token:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .token:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  @keyframes tokenFlow {
+    0% { transform: translateX(-100px) scale(0); opacity: 0; }
+    50% { transform: translateX(0px) scale(1); opacity: 1; }
+    100% { transform: translateX(100px) scale(0); opacity: 0; }
   }
 }
 

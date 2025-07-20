@@ -79,7 +79,7 @@ const Dashboard = () => {
               <Link to="/dashboard" className="text-primary font-medium">Dashboard</Link>
               <Link to="/create" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">List Property</Link>
             </nav>
-            <Button className="btn-soft">0x1234...5678</Button>
+            
           </div>
         </div>
       </header>

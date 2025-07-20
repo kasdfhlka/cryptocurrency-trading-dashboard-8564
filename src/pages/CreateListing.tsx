@@ -32,7 +32,7 @@ const CreateListing = () => {
               <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Dashboard</Link>
               <Link to="/create" className="text-primary font-medium">List Property</Link>
             </nav>
-            <Button className="btn-soft">Connect Wallet</Button>
+            
           </div>
         </div>
       </header>

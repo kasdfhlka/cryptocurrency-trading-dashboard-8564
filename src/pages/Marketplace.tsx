@@ -109,7 +109,7 @@ const Marketplace = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Header */}
-        <div className="mb-8">
+        <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold mb-4">Property Marketplace</h1>
           <p className="text-xl text-muted-foreground">
             Discover tokenized real estate opportunities with fractional ownership

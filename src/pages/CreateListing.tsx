@@ -39,7 +39,7 @@ const CreateListing = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Header */}
-        <div className="mb-8">
+        <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold mb-4">List Your Property</h1>
           <p className="text-xl text-muted-foreground">
             Tokenize your real estate and raise capital through fractional ownership

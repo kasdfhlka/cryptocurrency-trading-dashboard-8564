@@ -86,7 +86,7 @@ const Dashboard = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Header */}
-        <div className="mb-8">
+        <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold mb-4">Portfolio Dashboard</h1>
           <p className="text-xl text-muted-foreground">
             Track your real estate token investments and earnings

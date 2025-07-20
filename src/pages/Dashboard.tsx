@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrendingUp, DollarSign, Home, Calendar, ArrowUpRight, ArrowDownRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import Header from "@/components/Header";
 
 const Dashboard = () => {
   const holdings = [
@@ -67,22 +67,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold gradient-text">
-              PropertyFlow
-            </Link>
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/market" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Marketplace</Link>
-              <Link to="/dashboard" className="text-primary font-medium">Dashboard</Link>
-              <Link to="/create" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">List Property</Link>
-            </nav>
-            
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Header */}

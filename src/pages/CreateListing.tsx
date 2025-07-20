@@ -48,7 +48,7 @@ const CreateListing = () => {
 
         {/* Progress Steps */}
         <div className="max-w-4xl mx-auto mb-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isActive = currentStep === step.id;

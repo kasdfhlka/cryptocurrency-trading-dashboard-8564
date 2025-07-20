@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Filter, MapPin, TrendingUp, Home, Building2 } from "lucide-react";
+import { Search, MapPin, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import Header from "@/components/Header";
 
 const properties = [
   {
@@ -20,6 +21,8 @@ const properties = [
     totalTokens: 10000,
     rentYield: 7.2,
     price: "$45",
+    isVerified: true,
+    isNew: false,
   },
   {
     id: 2,
@@ -33,6 +36,8 @@ const properties = [
     totalTokens: 10000,
     rentYield: 4.8,
     price: "$120",
+    isVerified: true,
+    isNew: true,
   },
   {
     id: 3,
@@ -46,31 +51,61 @@ const properties = [
     totalTokens: 10000,
     rentYield: 6.5,
     price: "$85",
+    isVerified: false,
+    isNew: false,
+  },
+  {
+    id: 4,
+    title: "Urban Loft Studio",
+    location: "Chicago, IL",
+    type: "Loft",
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=250&fit=crop",
+    appraisedValue: 320000,
+    tokenPrice: 32,
+    availableTokens: 4200,
+    totalTokens: 10000,
+    rentYield: 8.1,
+    price: "$32",
+    isVerified: true,
+    isNew: true,
   },
 ];
 
 const Marketplace = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("yield");
+  const [propertyType, setPropertyType] = useState("all");
+  const [location, setLocation] = useState("all");
+
+  // Filter and sort properties
+  const filteredAndSortedProperties = useMemo(() => {
+    let filtered = properties.filter(property => {
+      const matchesSearch = property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           property.location.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesType = propertyType === "all" || property.type.toLowerCase().includes(propertyType);
+      const matchesLocation = location === "all" || property.location.toLowerCase().includes(location);
+      
+      return matchesSearch && matchesType && matchesLocation;
+    });
+
+    // Sort properties
+    switch (sortBy) {
+      case "yield":
+        return filtered.sort((a, b) => b.rentYield - a.rentYield);
+      case "price":
+        return filtered.sort((a, b) => a.tokenPrice - b.tokenPrice);
+      case "value":
+        return filtered.sort((a, b) => b.appraisedValue - a.appraisedValue);
+      case "available":
+        return filtered.sort((a, b) => b.availableTokens - a.availableTokens);
+      default:
+        return filtered;
+    }
+  }, [searchTerm, sortBy, propertyType, location]);
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold gradient-text">
-              PropertyFlow
-            </Link>
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/market" className="text-primary font-medium">Marketplace</Link>
-              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Dashboard</Link>
-              <Link to="/create" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">List Property</Link>
-            </nav>
-            <Button className="btn-soft">Connect Wallet</Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Page Header */}
@@ -104,18 +139,19 @@ const Marketplace = () => {
                 <SelectItem value="available">Most Available</SelectItem>
               </SelectContent>
             </Select>
-            <Select>
+            <Select value={propertyType} onValueChange={setPropertyType}>
               <SelectTrigger>
                 <SelectValue placeholder="Property Type" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="condo">Condominium</SelectItem>
-                <SelectItem value="house">Single Family</SelectItem>
+                <SelectItem value="condominium">Condominium</SelectItem>
+                <SelectItem value="single family">Single Family</SelectItem>
                 <SelectItem value="villa">Villa</SelectItem>
+                <SelectItem value="loft">Loft</SelectItem>
               </SelectContent>
             </Select>
-            <Select>
+            <Select value={location} onValueChange={setLocation}>
               <SelectTrigger>
                 <SelectValue placeholder="Location" />
               </SelectTrigger>
@@ -124,6 +160,7 @@ const Marketplace = () => {
                 <SelectItem value="texas">Texas</SelectItem>
                 <SelectItem value="california">California</SelectItem>
                 <SelectItem value="florida">Florida</SelectItem>
+                <SelectItem value="illinois">Illinois</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -131,7 +168,7 @@ const Marketplace = () => {
 
         {/* Properties Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {properties.map((property) => (
+          {filteredAndSortedProperties.map((property) => (
             <Card key={property.id} className="property-card group">
               <div className="relative overflow-hidden rounded-t-lg">
                 <img
@@ -139,10 +176,21 @@ const Marketplace = () => {
                   alt={property.title}
                   className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="absolute top-4 left-4">
+                <div className="absolute top-4 left-4 flex flex-col gap-2">
                   <Badge variant="secondary" className="bg-success text-success-foreground">
                     {property.rentYield}% Yield
                   </Badge>
+                  {property.isVerified && (
+                    <Badge className="bg-primary text-primary-foreground">
+                      <Star className="w-3 h-3 mr-1" />
+                      Verified
+                    </Badge>
+                  )}
+                  {property.isNew && (
+                    <Badge variant="outline" className="bg-warning/20 text-warning border-warning/50">
+                      New
+                    </Badge>
+                  )}
                 </div>
                 <div className="absolute top-4 right-4">
                   <Badge variant="outline" className="bg-background/80 backdrop-blur-sm">

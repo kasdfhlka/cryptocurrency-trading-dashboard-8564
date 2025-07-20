@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { ArrowLeft, MapPin, Calendar, TrendingUp, DollarSign, Home, Users, Wallet } from "lucide-react";
+import Header from "@/components/Header";
 
 const PropertyDetail = () => {
   const { id } = useParams();
@@ -36,22 +37,7 @@ const PropertyDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold gradient-text">
-              PropertyFlow
-            </Link>
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/market" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Marketplace</Link>
-              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Dashboard</Link>
-              <Link to="/create" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">List Property</Link>
-            </nav>
-            <Button className="btn-soft">Connect Wallet</Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Back Button */}
@@ -245,7 +231,7 @@ const PropertyDetail = () => {
 
                 <Button className="w-full btn-soft" size="lg">
                   <Wallet className="w-4 h-4 mr-2" />
-                  Connect Wallet & Buy
+                  Buy Tokens
                 </Button>
 
                 <div className="text-xs text-muted-foreground text-center">

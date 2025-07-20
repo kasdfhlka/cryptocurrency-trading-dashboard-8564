@@ -56,7 +56,7 @@ const Marketplace = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="text-2xl font-bold gradient-text">
@@ -64,10 +64,10 @@ const Marketplace = () => {
             </Link>
             <nav className="hidden md:flex items-center space-x-8">
               <Link to="/market" className="text-primary font-medium">Marketplace</Link>
-              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">Dashboard</Link>
-              <Link to="/create" className="text-muted-foreground hover:text-foreground transition-colors">List Property</Link>
+              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Dashboard</Link>
+              <Link to="/create" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">List Property</Link>
             </nav>
-            <Button className="btn-glow">Connect Wallet</Button>
+            <Button className="btn-soft">Connect Wallet</Button>
           </div>
         </div>
       </header>
@@ -191,7 +191,7 @@ const Marketplace = () => {
                 </div>
 
                 <Link to={`/property/${property.id}`}>
-                  <Button className="w-full btn-glow">
+                  <Button className="w-full btn-soft">
                     View Details & Buy Tokens
                   </Button>
                 </Link>
@@ -202,7 +202,7 @@ const Marketplace = () => {
 
         {/* Load More */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="btn-glow">
+          <Button variant="outline" size="lg" className="btn-soft">
             Load More Properties
           </Button>
         </div>

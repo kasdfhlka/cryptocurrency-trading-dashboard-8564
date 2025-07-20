@@ -21,18 +21,18 @@ const CreateListing = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="text-2xl font-bold gradient-text">
               PropertyFlow
             </Link>
             <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/market" className="text-muted-foreground hover:text-foreground transition-colors">Marketplace</Link>
-              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">Dashboard</Link>
+              <Link to="/market" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Marketplace</Link>
+              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Dashboard</Link>
               <Link to="/create" className="text-primary font-medium">List Property</Link>
             </nav>
-            <Button className="btn-glow">Connect Wallet</Button>
+            <Button className="btn-soft">Connect Wallet</Button>
           </div>
         </div>
       </header>
@@ -341,7 +341,7 @@ const CreateListing = () => {
               </Button>
               <Button
                 onClick={() => setCurrentStep(Math.min(4, currentStep + 1))}
-                className="btn-glow"
+                className="btn-soft"
               >
                 {currentStep === 4 ? "Submit for Review" : "Next Step"}
               </Button>

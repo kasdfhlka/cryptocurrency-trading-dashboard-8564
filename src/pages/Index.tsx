@@ -9,16 +9,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="text-2xl font-bold gradient-text">PropertyFlow</div>
             <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/market" className="text-muted-foreground hover:text-foreground transition-colors">Marketplace</Link>
-              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">Dashboard</Link>
-              <Link to="/create" className="text-muted-foreground hover:text-foreground transition-colors">List Property</Link>
+              <Link to="/market" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Marketplace</Link>
+              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">Dashboard</Link>
+              <Link to="/create" className="text-muted-foreground hover:text-foreground transition-all duration-200 interactive">List Property</Link>
             </nav>
-            <Button className="btn-glow">Connect Wallet</Button>
+            <Button className="btn-soft">Connect Wallet</Button>
           </div>
         </div>
       </header>
@@ -46,13 +46,13 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/market">
-                  <Button size="lg" className="btn-glow text-lg px-8 py-6">
+                  <Button size="lg" className="btn-soft text-lg px-8 py-6">
                     Browse Properties
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
                 <Link to="/create">
-                  <Button variant="outline" size="lg" className="text-lg px-8 py-6">
+                  <Button variant="outline" size="lg" className="btn-soft text-lg px-8 py-6">
                     List My Property
                   </Button>
                 </Link>
@@ -108,7 +108,7 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 * index, duration: 0.6 }}
               >
-                <Card className="property-card text-center h-full">
+                <Card className="property-card text-center h-full fade-in">
                   <CardContent className="p-8">
                     <feature.icon className="w-16 h-16 mx-auto mb-6 text-primary" />
                     <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
@@ -129,7 +129,7 @@ const Index = () => {
             Join thousands of investors building wealth through tokenized real estate
           </p>
           <Link to="/market">
-            <Button size="lg" className="btn-glow text-lg px-12 py-6">
+            <Button size="lg" className="btn-soft text-lg px-12 py-6">
               <Shield className="mr-2 w-5 h-5" />
               Start Investing Today
             </Button>
